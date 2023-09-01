@@ -39,15 +39,3 @@ func FillFile(file string, fields ...string) string {
 	}
 	return Fill(string(dat), fields...)
 }
-
-func main() {
-	if len(os.Args) == 1 {
-		fmt.Println(FillIn(os.Args[1:]...))
-	}
-	file := os.Args[1]
-	args := os.Args[2:]
-	if len(args) == 0 {
-		fmt.Println("")
-	}
-	fmt.Println(FillFile(file, args...))
-}

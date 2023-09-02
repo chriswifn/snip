@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -38,4 +39,23 @@ func FillFile(file string, fields ...string) string {
 		return ""
 	}
 	return Fill(string(dat), fields...)
+}
+
+func ListSnip(path string) []string {
+	var snips []string
+	err := filepath.Walk(path,
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if info.IsDir() {
+				return nil
+			}
+			snips = append(snips, path)
+			return nil
+		})
+	if err != nil {
+		return []string{}
+	}
+	return snips
 }

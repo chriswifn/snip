@@ -39,7 +39,7 @@ var Cmd = &Z.Cmd{
 	License:     `MIT`,
 	Source:      `git@github.com:chriswifn/snip.git`,
 	Issues:      `github.com/chriswifn/snip/issues`,
-	Commands:    []*Z.Cmd{snipCmd, help.Cmd, vars.Cmd, conf.Cmd, initCmd},
+	Commands:    []*Z.Cmd{snipCmd, help.Cmd, vars.Cmd, conf.Cmd, initCmd, listCmd},
 	Summary:     help.S(_snip),
 	Description: help.D(_snip),
 }
@@ -77,6 +77,19 @@ var snipCmd = &Z.Cmd{
 			return nil
 		}
 		fmt.Println(FillFile(filepath.Join(snipDir, filename), args[1:]...))
+		return nil
+	},
+}
+
+var listCmd = &Z.Cmd{
+	Name:     `list`,
+	Usage:    `[help]`,
+	Commands: []*Z.Cmd{help.Cmd},
+	Call: func(x *Z.Cmd, _ ...string) error {
+		snips := ListSnip(snipDir)
+		for _, snip := range snips {
+			fmt.Println(snip)
+		}
 		return nil
 	},
 }

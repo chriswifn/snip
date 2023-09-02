@@ -10,3 +10,6 @@ var _init string
 
 //go:embed text/en/snip.md
 var _snip string
+
+//go:embed text/en/list.md
+var _list string

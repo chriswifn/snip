@@ -82,9 +82,11 @@ var snipCmd = &Z.Cmd{
 }
 
 var listCmd = &Z.Cmd{
-	Name:     `list`,
-	Usage:    `[help]`,
-	Commands: []*Z.Cmd{help.Cmd},
+	Name:        `list`,
+	Usage:       `[help]`,
+	Commands:    []*Z.Cmd{help.Cmd},
+	Summary:     help.S(_list),
+	Description: help.D(_list),
 	Call: func(x *Z.Cmd, _ ...string) error {
 		snips := ListSnip(snipDir)
 		for _, snip := range snips {
